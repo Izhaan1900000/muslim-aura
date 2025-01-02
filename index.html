@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#121212">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>MuslimAura - Track Your Spiritual Journey</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.css">
+</head>
+<body class="dark-theme">
+    <div class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-mosque"></i>
+                <h1>MuslimAura</h1>
+            </div>
+            <div class="user-profile">
+                <span id="userName"></span>
+            </div>
+        </header>
+
+        <main>
+            <!-- Home Page -->
+            <div class="page active" id="homePage">
+                <section class="aura-dashboard card">
+                    <div class="aura-score">
+                        <h2>Your Aura Points</h2>
+                        <div class="aura-container">
+                            <div id="auraDisplay" class="aura-circle">
+                                <span id="totalAura">0</span>
+                            </div>
+                        </div>
+                        <div class="aura-actions">
+                            <button id="resetAura" class="reset-btn">
+                                <i class="fas fa-redo"></i> Reset Aura
+                            </button>
+                            <button id="shareAura" class="share-btn">
+                                <i class="fas fa-share-alt"></i> Share Progress
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="daily-actions card">
+                    <h2>Positive Actions</h2>
+                    <div class="action-buttons">
+                        <button class="action-btn positive" data-action="salah">
+                            <i class="fas fa-pray"></i>
+                            <span>Prayed Salah</span>
+                            <div class="points-badge">+1000</div>
+                        </button>
+                        <button class="action-btn positive" data-action="quran">
+                            <i class="fas fa-book-open"></i>
+                            <span>Read Qur'an</span>
+                            <div class="points-badge">+3000</div>
+                        </button>
+                        <button class="action-btn positive" data-action="charity">
+                            <i class="fas fa-hand-holding-heart"></i>
+                            <span>Gave Charity</span>
+                            <div class="points-badge">+2500</div>
+                        </button>
+                        <button class="action-btn positive" data-action="help">
+                            <i class="fas fa-hands-helping"></i>
+                            <span>Helped Someone</span>
+                            <div class="points-badge">+1500</div>
+                        </button>
+                        <button class="action-btn positive" data-action="dhikr">
+                            <i class="fas fa-peace"></i>
+                            <span>Dhikr</span>
+                            <div class="points-badge">+500</div>
+                        </button>
+                        <button class="action-btn positive" data-action="fast">
+                            <i class="fas fa-moon"></i>
+                            <span>Fasting</span>
+                            <div class="points-badge">+2000</div>
+                        </button>
+                        <button class="action-btn positive" data-action="dua">
+                            <i class="fas fa-heart"></i>
+                            <span>Made Du'a</span>
+                            <div class="points-badge">+1200</div>
+                        </button>
+                        <button class="action-btn positive" data-action="other_good">
+                            <i class="fas fa-star"></i>
+                            <span>Other Good Deed</span>
+                            <div class="points-badge">+1000</div>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="negative-actions card">
+                    <h2>Record Mistakes</h2>
+                    <p class="subtitle">For self-improvement and accountability</p>
+                    <div class="action-buttons">
+                        <button class="action-btn negative" data-action="missed_salah">
+                            <i class="fas fa-times-circle"></i>
+                            <span>Missed Salah</span>
+                            <div class="points-badge negative">-1000</div>
+                        </button>
+                        <button class="action-btn negative" data-action="negative_speech">
+                            <i class="fas fa-comment-slash"></i>
+                            <span>Negative Speech</span>
+                            <div class="points-badge negative">-1500</div>
+                        </button>
+                        <button class="action-btn negative" data-action="neglect">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Neglected Duties</span>
+                            <div class="points-badge negative">-2000</div>
+                        </button>
+                        <button class="action-btn negative" data-action="other_bad">
+                            <i class="fas fa-minus-circle"></i>
+                            <span>Other Mistake</span>
+                            <div class="points-badge negative">-1000</div>
+                        </button>
+                    </div>
+                </section>
+
+                <section class="daily-quote card">
+                    <h2>Daily Inspiration</h2>
+                    <blockquote id="dailyQuote">
+                    </blockquote>
+                </section>
+
+                <footer class="app-footer">
+                    <p>Developed & Designed with ❤️ by Izhan</p>
+                </footer>
+            </div>
+
+            <!-- Stats Page -->
+            <div class="page" id="statsPage">
+                <section class="stats-overview card">
+                    <h2>Statistics Overview</h2>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <i class="fas fa-star"></i>
+                            <h3>Total Aura</h3>
+                            <span id="totalAuraStats">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-fire"></i>
+                            <h3>Best Streak</h3>
+                            <span id="bestStreak">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-pray"></i>
+                            <h3>Total Prayers</h3>
+                            <span id="totalPrayers">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-book-open"></i>
+                            <h3>Qur'an Sessions</h3>
+                            <span id="totalQuranSessions">0</span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="activity-chart card">
+                    <h2>Weekly Activity</h2>
+                    <canvas id="weeklyChart"></canvas>
+                </section>
+
+                <section class="achievements card">
+                    <h2>Achievements</h2>
+                    <div class="achievements-grid" id="achievementsList">
+                        <!-- Achievements will be added dynamically -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- Community Page -->
+            <div class="page" id="communityPage">
+                <section class="leaderboard card">
+                    <h2>Global Leaderboard</h2>
+                    <div class="leaderboard-list" id="leaderboardList">
+                        <!-- Leaderboard items will be added dynamically -->
+                    </div>
+                </section>
+
+                <section class="community-challenges card">
+                    <h2>Active Challenges</h2>
+                    <div class="challenges-list" id="challengesList">
+                        <!-- Challenges will be added dynamically -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- Settings Page -->
+            <div class="page" id="settingsPage">
+                <section class="user-settings card">
+                    <h2>Profile Settings</h2>
+                    <div class="settings-form">
+                        <div class="form-group">
+                            <label for="displayName">Display Name</label>
+                            <input type="text" id="displayName" class="settings-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="avatarUpload">Profile Picture</label>
+                            <input type="file" id="avatarUpload" accept="image/*" class="settings-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="timeZone">Time Zone</label>
+                            <select id="timeZone" class="settings-input">
+                                <!-- Time zones will be added dynamically -->
+                            </select>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="app-settings card">
+                    <h2>App Settings</h2>
+                    <div class="settings-list">
+                        <div class="settings-item">
+                            <span>Prayer Reminders</span>
+                            <label class="switch">
+                                <input type="checkbox" id="prayerReminders">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-item">
+                            <span>Daily Notifications</span>
+                            <label class="switch">
+                                <input type="checkbox" id="dailyNotifications">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                        <div class="settings-item">
+                            <span>Sound Effects</span>
+                            <label class="switch">
+                                <input type="checkbox" id="soundEffects">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="data-settings card">
+                    <h2>Data Management</h2>
+                    <div class="settings-buttons">
+                        <button id="exportData" class="settings-btn">
+                            <i class="fas fa-download"></i> Export Data
+                        </button>
+                        <button id="importData" class="settings-btn">
+                            <i class="fas fa-upload"></i> Import Data
+                        </button>
+                        <button id="resetData" class="settings-btn danger">
+                            <i class="fas fa-trash"></i> Reset All Data
+                        </button>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="utils.js"></script>
+    <script src="actions.js"></script>
+    <script src="achievements.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
+</body>
+</html> 
